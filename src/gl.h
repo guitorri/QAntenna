@@ -21,9 +21,15 @@
 #ifndef GL_H
 #define GL_H
 
-#include <GL/gl.h>
-#include <GL/glu.h>
 #include <QString>
+
+#ifdef __linux__
+  #include <GL/gl.h>
+  #include <GL/glu.h>
+#elif  __APPLE__
+  #include <OpenGL/gl.h>
+  #include <OpenGL/glu.h>
+#endif
 
 #include "vec3.h"
 
