@@ -194,13 +194,23 @@ MainWindow::MainWindow()
 
   // Table options
   ui.fileList->header()->setDefaultAlignment(Qt::AlignLeft);
-  ui.fileList->header()->setSectionsMovable(false);
-  ui.fileList->header()->setStretchLastSection(false);
 
+#if QT_VERSION >= 0x050000
+  ui.fileList->header()->setSectionsMovable(false);
   ui.fileList->header()->setSectionResizeMode(listColName, QHeaderView::Stretch);
   ui.fileList->header()->setSectionResizeMode(listColFrequency, QHeaderView::Stretch);
   ui.fileList->header()->setSectionResizeMode(listColShow, QHeaderView::ResizeToContents);
   ui.fileList->header()->setSectionResizeMode(listColCalc, QHeaderView::ResizeToContents);
+#else
+   ui.fileList->header()->setMovable(false);
+   ui.fileList->header()->setResizeMode(listColName, QHeaderView::Stretch);
+   ui.fileList->header()->setResizeMode(listColFrequency, QHeaderView::Stretch);
+   ui.fileList->header()->setResizeMode(listColShow, QHeaderView::ResizeToContents);
+   ui.fileList->header()->setResizeMode(listColCalc, QHeaderView::ResizeToContents);
+#endif
+
+  ui.fileList->header()->setStretchLastSection(false);
+
 
   // The listColPath column contains the full path (used as id)
   ui.fileList->header()->hideSection(listColPath);
