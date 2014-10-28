@@ -48,6 +48,8 @@ int main(int argc, char *argv[])
 
 #ifdef WIN32
   QString transdir=".";
+#elif __APPLE__
+  QString transdir="/share/qantenna"; /// BUG
 #else
   QString transdir=PREFIX"/share/qantenna";
 #endif
